@@ -95,8 +95,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
        };
        layerDisplay(request.inputText);
     }else if (request.method == "receivePrompt") {
-       //console.log(request);
-       //console.log(request.data.message.content.parts[0]);
        if(currentChatItem != null){
            currentChatItem.getElementsByClassName("chat-content")[0].innerHTML = request.html;
        }
