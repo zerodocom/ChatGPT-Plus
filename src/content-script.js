@@ -1,5 +1,3 @@
-console.log("this is content-script");
-
 var currentChatItem = null;
 var RESP_BOX_ID = "respBox861029s";
 var selectionStores = {};
