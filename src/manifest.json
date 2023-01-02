@@ -9,7 +9,7 @@
     "48": "logo.png",
     "128": "logo.png"
   },
-  "permissions": ["storage", "contextMenus", "tabs"],
+  "permissions": ["contextMenus", "tabs"],
   "host_permissions":["http://*/", "https://*/"],
   "background": {
     "service_worker": "background.js",
