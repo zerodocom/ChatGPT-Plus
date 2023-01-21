@@ -6,7 +6,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #FFF;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,7 +16,8 @@
 }
 
 body {
-  min-width: 20rem;
+  min-width: 30rem;
+  margin: 0px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -27,4 +28,21 @@ body {
   a:hover {
     color: #747bff;
   }
+}
+
+.sidebar{
+  width: 60px;
+  background-color: #202123;
+}
+
+.sidebar .menu{
+  border-right: 0px;
+}
+
+/*.sidebar li {*/
+/*  padding: 0px 0px 0px 8px;*/
+/*}*/
+
+.chatgpt-btn-default {
+
 }

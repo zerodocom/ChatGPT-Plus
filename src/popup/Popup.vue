@@ -5,13 +5,62 @@ const crx = ref('create-chrome-ext')
 </script>
 
 <template>
-  <main>
-    <h3>Popup Page!</h3>
-
-    <h6>v 0.0.0</h6>
-
-    <a href="https://www.npmjs.com/package/create-chrome-ext" target="_blank">Power by {{ crx }}</a>
-  </main>
+  <div>
+    <el-container>
+      <el-aside class="sidebar">
+        <el-menu background-color="#202123" text-color="#fff" class="menu">
+          <el-menu-item index="1">
+            <el-icon><ChatSquare /></el-icon>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <el-icon><CollectionTag /></el-icon>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <el-icon><Opportunity /></el-icon>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <el-icon><Setting /></el-icon>
+          </el-menu-item>
+        </el-menu>
+      </el-aside>
+      <el-container>
+        <el-header>
+          aaa
+        </el-header>
+        <el-main>
+          <el-row class="mb-4">
+            <el-button>Default</el-button>
+            <el-button type="primary"><ChatSquare style="width: 1em; height: 1em; margin-right: 8px"  />Primary</el-button>
+            <el-button type="success">Success</el-button>
+            <el-button type="info">Info</el-button>
+            <el-button type="warning">Warning</el-button>
+            <el-button type="danger">Danger</el-button>
+          </el-row>
+            <p>
+              with extra class <b>is-loading</b>, your icon is able to rotate 360 deg in 2
+              seconds, you can also override this
+            </p>
+            <ChatSquare style="width: 1em; height: 1em; margin-right: 8px"  />
+            <el-icon color="#409EFC" class="no-inherit">
+              <Share />
+            </el-icon>
+            <el-icon>
+              <Delete />
+            </el-icon>
+            <el-icon class="is-loading">
+              <Loading />
+            </el-icon>
+            <el-button type="primary">
+              <el-icon style="vertical-align: middle">
+                <Search />
+              </el-icon>
+              <span style="vertical-align: middle"> Search </span>
+            </el-button>
+        </el-main>
+        <el-footer>Footer</el-footer>
+      </el-container>
+    </el-container>
+  </div>
 </template>
 
 <style scoped>
