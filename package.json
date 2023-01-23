@@ -21,9 +21,11 @@
     "@element-plus/icons-vue": "^2.0.10",
     "element-plus": "^2.2.28",
     "marked": "^4.0.8",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@types/vue-router": "^2.0.0",
     "@crxjs/vite-plugin": "^2.0.0-beta.10",
     "@types/chrome": "^0.0.208",
     "@types/marked": "^4.0.8",
