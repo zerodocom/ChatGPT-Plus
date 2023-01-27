@@ -1,3 +1,3 @@
 <template>
-this is shortcut
+  this is shortcut
 </template>

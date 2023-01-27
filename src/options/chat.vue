@@ -1,3 +1,3 @@
 <template>
-this is chat
+  this is chat
 </template>

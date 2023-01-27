@@ -1,7 +1,12 @@
 <template>
   <el-container>
     <el-aside class="sidebar">
-      <el-menu background-color="#202123" text-color="#fff" class="menu" router="true">
+      <el-menu
+        class="menu"
+        router="true"
+        background-color="#202123"
+        text-color="#fff"
+        active-text-color="#13a27e">
         <el-menu-item index="1" route="/chat">
           <el-icon><ChatSquare /></el-icon>
           <span>聊天会话</span>

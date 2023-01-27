@@ -1,3 +1,3 @@
 <template>
-this is prompt
+  this is prompt
 </template>

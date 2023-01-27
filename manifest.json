@@ -1,0 +1,29 @@
+{
+  "name": "ChatGPT Plus",
+  "manifest_version": 3,
+  "description": "A browser plugin that enhances the ability of ChatGPT",
+  "version": "1.0.3",
+  "icons": {
+    "16": "img/logo.png",
+    "32": "img/logo.png",
+    "48": "img/logo.png",
+    "128": "img/logo.png"
+  },
+  "action":{
+    "default_popup": "popup.html",
+    "default_icon": "img/logo.png"
+  },
+  "background": {
+    "service_worker": "src/background/main.ts"
+  },
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["src/content/main.ts"]
+  }],
+  "options_page": "options.html",
+  "permissions": ["contextMenus"],
+  "host_permissions": [
+    "http://*/",
+    "https://*/"
+  ]
+}

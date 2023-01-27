@@ -1,5 +1,14 @@
 body {
-  min-width: 30rem;
-  margin: 0px;
-  height: 100%;
+    min-width: 30rem;
+    margin: 0px;
+    height: 100%;
+}
+
+.sidebar{
+    margin: 0px;
+    background-color: #202123;
+}
+
+.sidebar .menu {
+    border-right: 0px;
 }
