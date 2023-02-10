@@ -44,12 +44,24 @@
 //   return true;
 // });
 
-async function request(uri: any, method: any, data: any) {
-  return chrome.runtime.sendMessage({
+enum RequestTarget {
+  Background,
+  CurrentTab,
+}
+
+async function request(target: RequestTarget, uri: any, method: any, data: any) {
+  let payload = {
     uri: uri,
     method: method,
     data: data,
-  });
+  };
+  if(target === RequestTarget.Background){
+    return chrome.runtime.sendMessage(payload);
+  }else if(target === RequestTarget.CurrentTab){
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs:any) {
+      chrome.tabs.sendMessage(tabs[0].id, payload);
+    });
+  }
 }
 
 class Server {
@@ -109,3 +121,4 @@ class Server {
 
 export {Server};
 export {request};
+export {RequestTarget};

@@ -13,17 +13,20 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { request } from "../apiServer";
+import { request,RequestTarget } from "../apiServer";
 
 // do not use same name with ref
 const form = reactive({
   language: ''
 })
 
+// 增加能力增强页签
+// 里面有增加一键复制按钮
+
 async function onSubmit() {
   console.log(form);
   console.log('submit!')
-  let res = await request("/api/v1/settings", "GET", {"kk":"ccc11"});
+  let res = await request(RequestTarget.Background, "/api/v1/settings", "GET", {"kk":"ccc11"});
   console.log("get background response:", res);
 }
 </script>

@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+}
+
 body {
     min-width: 30rem;
     margin: 0px;
@@ -11,4 +15,29 @@ body {
 
 .sidebar .menu {
     border-right: 0px;
+}
+
+.options-app{
+    height: 100%;
+}
+
+.options-container{
+    height: 100%;
+}
+
+.conversation-table a{
+    text-decoration: none;
+}
+
+.shortcut-item-target-desc{
+    font-weight: 300;
+    margin-left: 20px;
+    color: #aaa;
+}
+
+.el-input__wrapper.is-focus{
+    box-shadow: 0 0 0 1px #13a27e inset;
+}
+.el-button--primary {
+    background-color: #13a27e;
 }

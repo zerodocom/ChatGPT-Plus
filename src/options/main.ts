@@ -5,16 +5,22 @@ import './style.css';
 import {ChatSquare,CollectionTag,Opportunity,Setting} from "@element-plus/icons-vue";
 import App from './App.vue';
 import { createWebHashHistory, createRouter } from "vue-router";
-import Chat from "./Chat.vue";
+import Conversation from "./Conversation.vue";
 import Prompt from "./Prompt.vue";
 import Settings from "./Settings.vue";
 import Shortcut from "./Shortcut.vue";
+import Home from "./Home.vue";
 
 const routes = [
   {
-    path: "/chat",
-    name: "Chat",
-    component: Chat,
+    path: "/",
+    name: "Home",
+    component: Home,
+  },
+  {
+    path: "/conversation",
+    name: "Conversation",
+    component: Conversation,
   },
   {
     path: "/prompt",
