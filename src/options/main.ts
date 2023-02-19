@@ -8,7 +8,7 @@ import { createWebHashHistory, createRouter } from "vue-router";
 import Conversation from "./Conversation.vue";
 import Prompt from "./Prompt.vue";
 import Settings from "./Settings.vue";
-import Shortcut from "./Shortcut.vue";
+import Shortcut from "./Shortcuts.vue";
 import Home from "./Home.vue";
 
 const routes = [

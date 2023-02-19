@@ -19,19 +19,21 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "vue": "^3.2.45",
-    "vue-router": "^4.1.6",
-    "marked": "^4.0.8",
+    "@element-plus/icons-vue": "^2.0.10",
     "element-plus": "^2.2.28",
-    "@element-plus/icons-vue": "^2.0.10"
+    "marked": "^4.2.12",
+    "uuid": "^9.0.0",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.1.4",
-    "@types/node": "^18.11.12",
-    "@types/marked": "^4.0.8",
-    "@types/chrome": "^0.0.208",
-    "@vitejs/plugin-vue": "^4.0.0",
     "@crxjs/vite-plugin": "^2.0.0-beta.10",
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@types/chrome": "^0.0.208",
+    "@types/marked": "^4.0.8",
+    "@types/node": "^18.11.12",
+    "@types/uuid": "^9.0.0",
+    "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "@vue/tsconfig": "^0.1.3",

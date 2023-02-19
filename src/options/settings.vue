@@ -1,32 +1,58 @@
 <template>
-  <el-form :model="form" label-width="120px">
-    <el-form-item label="界面语言">
-      <el-select v-model="form.language" placeholder="please select the language">
-        <el-option label="简体中文" value="zh-cn" />
-      </el-select>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="onSubmit">保存</el-button>
-    </el-form-item>
-  </el-form>
+  <el-main>
+    <el-card>
+      <div v-if="data.session && data.session.user" class="person-info">
+        <img :src="data.session.user.image" class="chat-icon"/>
+        <div class="person-info-text">
+          <div>{{ data.session.user.name }}</div>
+          <div>{{ data.session.user.email }}</div>
+        </div>
+      </div>
+      <div v-if="data.session && data.session.user" class="person-ak-update-time">
+        AccessToken expires: {{ data.session.expires }} <a target="_blank" href="https://chat.openai.com/chat"><el-button @click="sessionClear()">Refresh</el-button></a>
+      </div>
+      <div v-if="!(data.session && data.session.user)" class="person-login">
+        chat.openai.com <a target="_blank" href="https://chat.openai.com/chat"><el-button>Login</el-button></a>
+      </div>
+    </el-card>
+  </el-main>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
-import { request,RequestTarget } from "../apiServer";
+import {onMounted, reactive} from 'vue';
+import { request, RequestTarget } from "../apiServer";
 
-// do not use same name with ref
-const form = reactive({
-  language: ''
-})
+let sessionData:any = {};
 
-// 增加能力增强页签
-// 里面有增加一键复制按钮
+const data = reactive({
+  session: sessionData,
+});
 
-async function onSubmit() {
-  console.log(form);
-  console.log('submit!')
-  let res = await request(RequestTarget.Background, "/api/v1/settings", "GET", {"kk":"ccc11"});
-  console.log("get background response:", res);
+// // do not use same name with ref
+// const form = reactive({
+//   language: ''
+// })
+
+// enhance capability
+// Add a one-click copy button
+async function getSessionInfo() {
+  const sessionData = await request(RequestTarget.Background,"/api/v1/chatgpt/session", "GET", {});
+  data.session = sessionData;
+  console.log(sessionData);
+};
+
+onMounted(function (){
+  getSessionInfo();
+});
+
+async function sessionClear(){
+  await request(RequestTarget.Background, "/api/v1/chatgpt/session/clear", "POST", {});
 }
+
+// async function onSubmit() {
+//   // console.log(form);
+//   console.log('submit!')
+//   let res = await request(RequestTarget.Background, "/api/v1/settings", "GET", {"kk":"ccc11"});
+//   console.log("get background response:", res);
+// }
 </script>

@@ -14,16 +14,20 @@
     "default_icon": "img/logo.png"
   },
   "background": {
-    "service_worker": "src/background/main.ts"
+    "service_worker": "src/background/server.ts"
   },
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
-    "js": ["src/content/main.ts"]
+    "js": ["src/content/content.ts"]
   }],
   "options_page": "options.html",
-  "permissions": ["contextMenus"],
+  "permissions": ["contextMenus","storage","tab"],
   "host_permissions": [
     "http://*/",
     "https://*/"
-  ]
+  ],
+  "web_accessible_resources": [{
+    "matches": ["http://*/*", "https://*/*","chrome-extension://pninjimghhmjnkefobpefgknajnjimem/*"],
+    "resources": ["content.css","options.css"]
+  }]
 }

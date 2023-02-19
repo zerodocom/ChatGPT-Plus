@@ -29,10 +29,10 @@
 <!--      <el-header>-->
 
 <!--      </el-header>-->
-      <el-main>
+<!--      <el-main>-->
         <router-view />
-      </el-main>
-      <el-footer></el-footer>
+<!--      </el-main>-->
+<!--      <el-footer></el-footer>-->
     </el-container>
   </el-container>
 </template>

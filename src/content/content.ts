@@ -1,58 +1,126 @@
-
-import { createApp } from 'vue';
+import {createApp} from 'vue';
 import App from "./ChatCard.vue";
 import ElementPlus from "element-plus";
+import {request, RequestTarget, Server} from "../apiServer";
 
 // let selectionStores:{[key:string]:any} = {};
-let respLayerOrigin = document.createElement("chatgpt-plus-layer");
-let respLayer = respLayerOrigin.attachShadow({mode: 'open'});
+// let respLayerOrigin = document.createElement("chatgpt-plus-layer");
+// let respLayer = respLayerOrigin.attachShadow({mode: 'open'});
+//
+// let head = document.createElement("head");
+// respLayer.appendChild(head);
+// let body = document.createElement("body");
+// respLayer.appendChild(body);
+//
+// let linkContent = document.createElement("link");
+// linkContent.rel = "stylesheet";
+// linkContent.href= "chrome-extension://" + chrome.runtime.id + "/content.css";
+// head.appendChild(linkContent);
+//
+// let linkOptions = document.createElement("link");
+// linkOptions.rel = "stylesheet";
+// linkOptions.href= "chrome-extension://" + chrome.runtime.id + "/options.css";
+// head.appendChild(linkOptions);
 
-// let a = import("../assets/chat-card.css");
+let respLayer:ShadowRoot;
+let respLayerOrigin: HTMLElement;
 
-let head = document.createElement("head");
-respLayer.appendChild(head);
-let body = document.createElement("body");
-respLayer.appendChild(body);
+function layerInit(){
 
-let link = document.createElement("link");
-link.rel = "stylesheet";
-link.href= "@/assets/chat-card.css";
-head.appendChild(link);
+    respLayerOrigin = document.createElement("chatgpt-plus-layer");
+    respLayer = respLayerOrigin.attachShadow({mode: 'open'});
 
-// let respBox = document.createElement("div");
-// respBox.style.width = "800px";
-// respBox.style.position = "absolute";
-// respBox.style.left = "10px";
-// respBox.style.top = "10px";
-// respBox.style.background = "#FFF";
-// respBox.style.border = "1px solid #dee2e5";
-// respBox.style.borderRadius = "5px";
-// respBox.style.boxShadow = "0px 2px 16px rgb(0 0 0 / 16%)";
-// respBox.style.zIndex="99999999";
-// body.appendChild(respBox);
+    let head = document.createElement("head");
+    respLayer.appendChild(head);
+    let body = document.createElement("body");
+    respLayer.appendChild(body);
 
-let html = document.createElement("html");
-respLayer.appendChild(html);
+    let linkContent = document.createElement("link");
+    linkContent.rel = "stylesheet";
+    linkContent.href= "chrome-extension://" + chrome.runtime.id + "/content.css";
+    head.appendChild(linkContent);
 
-function layerDisplay(){
+    let linkOptions = document.createElement("link");
+    linkOptions.rel = "stylesheet";
+    linkOptions.href= "chrome-extension://" + chrome.runtime.id + "/options.css";
+    head.appendChild(linkOptions);
+
     console.log("try !!to enable response-layer");
     document.getElementsByTagName("html")[0].appendChild(respLayerOrigin);
-    // let layer = document.querySelector("response-layer");
-    // if(layer === null){
-    //     document.getElementsByTagName("html")[0].appendChild(respLayer);
-    //     layer = respLayer;
-    // }
-    // let position = window!.getSelection()!.getRangeAt(0).getBoundingClientRect();
-    // console.log(position);
-    // respBox.style.top = (window.scrollY + position.top + position.height + 5) + "px";
-    // respBox.style.left = position.left + "px";
-    // respBox.style.display = "block";
+    const app = createApp(App);
+    app.use(ElementPlus).mount(body);
 
+    document.addEventListener("click", function(event){
+        let chatCard = respLayer.querySelector<HTMLElement>(".chat-card")!;
+        if(chatCard !== null){
+            if(event.target === respLayerOrigin || event.target === chatCard || chatCard.contains(event.target as HTMLInputElement)){
+                // click in respBox
+            }else{
+                chatHide();
+            }
+        }
+    });
 }
 
-layerDisplay();
+function chatDisplay(){
+    let chatCard = respLayer.querySelector<HTMLElement>(".chat-card")!;
+    let position = window!.getSelection()!.getRangeAt(0).getBoundingClientRect();
+    console.log(chatCard);
+    chatCard.style.top = (window.scrollY + position.top + position.height + 5) + "px";
+    chatCard.style.left = position.left + "px";
+    chatCard.style.display = "block";
+}
 
-const app = createApp(App);
-app.use(ElementPlus).mount(body);
+function chatHide(){
+    let chatCard = respLayer.querySelector<HTMLElement>(".chat-card")!;
+    chatCard.style.display = "none";
+}
+
+
+let contentApi = new Server();
+class ContentAPI {
+    @contentApi.route("/api/v1/content/openChat", "POST")
+    public async openChat(data:any) {
+        let layer = document.querySelector("chatgpt-plus-layer");
+        if(layer === null) {
+            layerInit();
+        }
+        chatDisplay();
+        return {"result": true};
+    }
+}
+
+contentApi.run();
+new ContentAPI();
+
+async function chatgptPage(){
+    console.log("start sync");
+    await request(RequestTarget.Background, "/api/v1/chatgpt/conversations/sync", "POST", {});
+    await request(RequestTarget.Background, "/api/v1/chatgpt/conversations/shortcut/sync", "POST", {});
+    const refreshResult = await request(RequestTarget.Background, "/api/v1/chatgpt/session/refresh", "POST", {});
+    console.log(refreshResult);
+    console.log("do sync!");
+}
+
+// when https://chat.openai.com/chat is open, do something
+if (window.location.hostname === "chat.openai.com" && window.location.pathname.startsWith("/chat")){
+
+    // const newChatElement = document!.querySelector("nav")!.children[0] as HTMLElement;
+    // newChatElement.style.width = '70%';
+    // let searchElement = document.createElement("div");
+    // searchElement.className = "text-white";
+    // searchElement.innerText = "Search";
+    // searchElement.style.width = "30%";
+    // searchElement.style.right = "0px";
+    // searchElement.style.paddingLeft = "10px";
+    // searchElement.style.paddingTop = "5px";
+    // searchElement.style.cursor = "pointer";
+    // searchElement.style.position = "absolute";
+    // newChatElement.after(searchElement);
+
+    chatgptPage().then(function (){
+        console.log("chatgpt page done!");
+    });
+}
 
 export {};

@@ -41,3 +41,45 @@ body {
 .el-button--primary {
     background-color: #13a27e;
 }
+
+.new-shortcut{
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.el-radio-button__original-radio:checked+.el-radio-button__inner{
+    background-color: #13a27e;
+    border-color: #13a27e;
+}
+
+.el-button:focus, .el-button:hover {
+    border-color: var(--el-button-hover-border-color);
+    background-color: var(--el-button-hover-bg-color);
+}
+
+.chat-icon{
+    height: 30px;
+    width: 30px;
+    background-color: #aaa;
+    border-radius: 2px;
+}
+
+.person-info{
+    width: 300px;
+    display: flex;
+}
+.person-info .person-info-text {
+    margin-left: 10px;
+    width: 260px;
+}
+.person-ak-update-time{
+    float: right;
+    margin-top: -30px;
+    color: #AAA;
+}
+.person-ak-update-time a{
+    text-decoration: none;
+}
+.person-login a{
+    text-decoration: none;
+}
