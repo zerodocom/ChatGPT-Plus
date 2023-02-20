@@ -27,7 +27,7 @@
     "https://*/"
   ],
   "web_accessible_resources": [{
-    "matches": ["http://*/*", "https://*/*","chrome-extension://pninjimghhmjnkefobpefgknajnjimem/*"],
+    "matches": ["http://*/*", "https://*/*"],
     "resources": ["content.css","options.css"]
   }]
 }
